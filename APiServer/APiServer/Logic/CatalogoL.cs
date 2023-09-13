@@ -23,10 +23,10 @@ namespace APiServer.Logic
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(Options.Email,Options.Password)
-               
-      
-            };
+                Credentials = new NetworkCredential("ejemplopruebadiaz@gmail.com", "rkjvpkwkjqhkydur")
+
+
+        };
         }
         public List<Catalogo> lista()
         {
@@ -41,22 +41,7 @@ namespace APiServer.Logic
             var correo = new MailMessage(from: Options.Email, to: email, subject: subject, body: message);
             correo.IsBodyHtml = true;
 
-            MailMessage message0 = new MailMessage();
-            message0.To.Add(new MailAddress(email));
-            message0.From= new MailAddress("mail.com");
-            message0.Subject = "Prueba de llenado de formulario";
-            message0.Body = "Bienvenidos a la  prueba";
-           
-
-            SmtpClient smtpClient = new SmtpClient();
-            smtpClient.Host = "smtp.gmail.com";
-            smtpClient.Port = 587;
-            smtpClient.UseDefaultCredentials = false;
-            smtpClient.Credentials = new NetworkCredential(Options.Email,Options.Password);
-            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtpClient.EnableSsl = true;
-           // smtpClient.Send(message0);
-            return Cliente.SendMailAsync(message0);
+            return Cliente.SendMailAsync(correo);
         }
     }
 }
